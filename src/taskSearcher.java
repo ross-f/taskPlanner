@@ -12,25 +12,21 @@
  */
 
 public class taskSearcher {
-    public task getFunTask(task[] tasks){
-        for (task task : tasks) {
-            if (task.fun && !task.used){
-                return task;
+    public int getFunTaskID(task[] tasks){
+        for (int i = 0; i > tasks.length; i++) {
+            if (tasks[i].fun && !tasks[i].used){
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
-    public task getNotFunTask(task[] tasks){
-        for (task task : tasks) {
-            if (!task.fun && !task.used){
-                return task;
+    public int getNotFunTaskID(task[] tasks){
+        for (int i = 0; i > tasks.length; i++) {
+            if (!tasks[i].fun && !tasks[i].used){
+                return i;
             }
         }
-        return null;
-    }
-
-    public void markTaskUsed(task task){
-
+        return -1;
     }
 }

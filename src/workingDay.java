@@ -12,4 +12,5 @@ public class workingDay {
         this.dayStartsAt = dayStartsAt;
         this.dayEndsAt = dayEndsAt;
     }
+
 }

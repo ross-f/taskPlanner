@@ -1,14 +1,14 @@
-import java.sql.Date;
-import java.sql.Time;
+import org.joda.time.DateTime;
+import org.joda.time.LocalTime;
 
 /**
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
  */
 public class workingDay {
-    Date dayStartsAt, dayEndsAt;
+    LocalTime dayStartsAt, dayEndsAt;
 
-    public workingDay(Date dayStartsAt, Date dayEndsAt) {
+    public workingDay(LocalTime dayStartsAt, LocalTime dayEndsAt) {
         this.dayStartsAt = dayStartsAt;
         this.dayEndsAt = dayEndsAt;
     }

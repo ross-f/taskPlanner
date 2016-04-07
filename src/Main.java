@@ -7,14 +7,13 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) throws ParseException {
-        task[] tasks = {};
+        task[] tasks = new task[3];
         tasks[0] = new task("WQ12", false, 1);
         tasks[1] = new task("PRJ2", false, 1);
         tasks[2] = new task("fun", true, 1);
 
         setTimes st = new setTimes("7/4/2016", "8/4/2016", "30");
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy hh:mm");
-        Date[] startTimes = {(Date) df.parse("07/04/2016 09:00"), (Date) df.parse("07/04/2016 09:00")};
+        [] startTimes = {(Date) df.parse("07/04/2016 09:00"), (Date) df.parse("07/04/2016 09:00")};
         Date[] endTimes = {(Date) df.parse("07/04/2016 18:00"), (Date) df.parse("07/04/2016 18:00")};
         workingDay[] days = st.generateDays(startTimes, endTimes);
 
@@ -23,7 +22,7 @@ public class Main {
         int[] noOfTasksInEachDay = lt.getNumberOfTasksInEachDay(days);
         int lengthOfTasks = lt.getLengthOfOneEstimationPointInMinutes();
 
-        timetableForADay[] timetable = {};
+        timetableForADay timetable[];
 
         timetable = st.assignTasksToDays(tasks,noOfTasksInEachDay,lengthOfTasks,days);
 

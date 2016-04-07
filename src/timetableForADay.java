@@ -1,3 +1,6 @@
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+
 import java.sql.Date;
 import java.sql.Time;
 
@@ -8,10 +11,10 @@ import static java.lang.System.*;
  * Should be used as part of taskPlanner
  */
 public class timetableForADay {
-    Date dayStartsAt;
+    LocalTime dayStartsAt;
     tasksInADay tasks;
 
-    public timetableForADay(Date dayStartsAt, tasksInADay tasks) {
+    public timetableForADay(LocalTime dayStartsAt, tasksInADay tasks) {
         this.dayStartsAt = dayStartsAt;
         this.tasks = tasks;
     }

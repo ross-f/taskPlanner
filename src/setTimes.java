@@ -1,40 +1,29 @@
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.sql.Date;
-
-import static java.lang.Integer.parseInt;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
  */
 public class setTimes {
-    Date startDate;
-    Date endDate;
+    LocalDate startDate;
+    LocalDate endDate;
     long totalNumberOfDays;
 
     public setTimes(String startDate, String endDate, String lengthOfOneEstimationPointAsString) {
-        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        DateTimeFormatter df = DateTimeFormat.forPattern("dd/MM/yyyy");
 
-        try {
-            this.startDate = (Date) df.parse(startDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        this.startDate = df.parseLocalDate(startDate);
+        this.endDate = df.parseLocalDate(endDate);
 
-        try {
-            this.endDate = (Date) df.parse(endDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        this.totalNumberOfDays = Math.round(
-                (this.endDate.getTime() - this.startDate.getTime()) / (double) 86400000);
+        this.totalNumberOfDays = Days.daysBetween(this.startDate, this.endDate).getDays();
     }
 
-    public workingDay[] generateDays(Date dayStartsAt[], Date dayEndsAt[]){
+    public workingDay[] generateDays(LocalTime dayStartsAt[], LocalTime dayEndsAt[]){
         workingDay[] days = {};
 
         for(int i = 0; i < this.totalNumberOfDays; i++)
@@ -50,7 +39,7 @@ public class setTimes {
         taskSearcher ts = new taskSearcher();
         //count through each day
         for (int dayNumber = 1; dayNumber < numberOfDays; dayNumber++ ) {
-            Date dayStartsAt = startAndEndTimes[dayNumber].dayStartsAt;
+            LocalTime dayStartsAt = startAndEndTimes[dayNumber].dayStartsAt;
             tasksInADay tasksForToday;
             String[] taskNames = {};
             boolean[] areTasksFun = {};

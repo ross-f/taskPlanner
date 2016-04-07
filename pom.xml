@@ -1,0 +1,13 @@
+<project xmlns="jar:///usr/share/intellijidea-ce/plugins/maven/lib/maven.jar!/schemas/maven-4.0.0.xsd">
+    <groupId>com.ross.thing</groupId>
+    <version>0.1</version>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>thing</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+    </dependencies>
+</project>

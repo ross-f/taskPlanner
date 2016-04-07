@@ -1,5 +1,3 @@
-import java.sql.Time;
-
 import static java.lang.Integer.parseInt;
 
 /**
@@ -21,13 +19,12 @@ public class lenghtOfTasks {
         int numberOfDays = days.length;
         int[] numberOfTasksInEachDay = {};
         for (int i = 0; i < numberOfDays; i++) {
-            long timeInADay = days[i].dayEndsAt.getTime() - days[i].dayStartsAt.getTime();
+            long timeInADay = days[i].dayEndsAt.getMillisOfDay() - days[i].dayStartsAt.getMillisOfDay();
             timeInADay /= 100;
             timeInADay /= 60;
 
             numberOfTasksInEachDay[i] = (int) (timeInADay / lengthOfOneEstimationPointInMinutes);
         }
-
         return numberOfTasksInEachDay;
     }
 

@@ -13,7 +13,7 @@
 
 public class taskSearcher {
     public int getFunTaskID(task[] tasks){
-        for (int i = 0; i > tasks.length; i++) {
+        for (int i = 0; i < tasks.length; i++) {
             if (tasks[i].fun && !tasks[i].used){
                 return i;
             }
@@ -22,7 +22,7 @@ public class taskSearcher {
     }
 
     public int getNotFunTaskID(task[] tasks){
-        for (int i = 0; i > tasks.length; i++) {
+        for (int i = 0; i < tasks.length; i++) {
             if (!tasks[i].fun && !tasks[i].used){
                 return i;
             }

@@ -3,62 +3,98 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import java.util.Date;
+
+import java.util.stream.IntStream;
 
 /**
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
  */
-public class setTimes {
-    LocalDate startDate;
-    LocalDate endDate;
-    long totalNumberOfDays;
+class setTimes {
+    private long totalNumberOfDays;
 
-    public setTimes(String startDate, String endDate, String lengthOfOneEstimationPointAsString) {
+    setTimes(String startDate, String endDate, String lengthOfOneEstimationPointAsString) {
         DateTimeFormatter df = DateTimeFormat.forPattern("dd/MM/yyyy");
 
-        this.startDate = df.parseLocalDate(startDate);
-        this.endDate = df.parseLocalDate(endDate);
+        LocalDate startDate1 = df.parseLocalDate(startDate);
+        LocalDate endDate1 = df.parseLocalDate(endDate);
 
-        this.totalNumberOfDays = Days.daysBetween(this.startDate, this.endDate).getDays();
+        this.totalNumberOfDays = Days.daysBetween(startDate1, endDate1).getDays();
     }
 
-    public workingDay[] generateDays(LocalTime dayStartsAt[], LocalTime dayEndsAt[]){
-        workingDay[] days = {};
+    workingDay[] generateDays(LocalTime dayStartsAt[], LocalTime dayEndsAt[]){
+        workingDay[] days = new workingDay[dayStartsAt.length];
 
-        for(int i = 0; i < this.totalNumberOfDays; i++)
+        for(int i = 0; i < dayStartsAt.length; i++)
             days[i] = new workingDay(dayStartsAt[i], dayEndsAt[i]);
 
         return days;
     }
 
+    LocalTime[] dateStringsToDateTimes(String[] dateStringArray) {
+        LocalTime[] dateTimes =  new LocalTime[dateStringArray.length];
+        for (int i = 0; i < dateStringArray.length; i++) {
+            DateTimeFormatter df = DateTimeFormat.forPattern("HH:mm");
+            try {
+                dateTimes[i] = df.parseLocalTime(dateStringArray[i]);
+            } catch (Exception e) {
+                // incorrect format
+                // EXIT CODE 3
+                System.exit(3);
+            }
+        }
+        return dateTimes;
+    }
 
-    public timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lenghtOfTasksInMins, workingDay[] startAndEndTimes){
+    workingDay[] inputDayTimes(String[] dayStartsAtStrings, String[] dayEndsAtStrings){
+        // EXIT CODE 2
+        if (dayStartsAtStrings.length - dayEndsAtStrings.length != 0) System.exit(2);
+        LocalTime[] dayStartsAtDateTimes = dateStringsToDateTimes(dayStartsAtStrings),
+                dayEndsAtDateTimes = dateStringsToDateTimes(dayEndsAtStrings);
+
+        return generateDays(dayStartsAtDateTimes, dayEndsAtDateTimes);
+    }
+
+    timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lenghtOfTasksInMins, workingDay[] startAndEndTimes){
         int numberOfDays = numberOfTasksForEachDay.length;
-        timetableForADay[] timetable = {};
+              //  totalNumberOfTasks = IntStream.of(numberOfDays).sum();
+        timetableForADay[] timetable = new timetableForADay[numberOfDays];
         taskSearcher ts = new taskSearcher();
         //count through each day
-        for (int dayNumber = 1; dayNumber < numberOfDays; dayNumber++ ) {
+        for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++ ) {
             LocalTime dayStartsAt = startAndEndTimes[dayNumber].dayStartsAt;
             tasksInADay tasksForToday;
-            String[] taskNames = {};
-            boolean[] areTasksFun = {};
+            String[] taskNames = new String[numberOfTasksForEachDay[dayNumber]];
+            boolean[] areTasksFun = new boolean[numberOfTasksForEachDay[dayNumber]];
 
             // count through number of tasks for that day
-            for (int taskNumber = 1; taskNumber <= numberOfTasksForEachDay[dayNumber]; taskNumber++){
+            for (int taskNumber = 0; taskNumber < numberOfTasksForEachDay[dayNumber]; taskNumber++){
                 // odd is fun even is not
                 if (taskNumber % 2 == 1){
                     // task is fun
-                    task task = tasks[ts.getFunTaskID(tasks)];
-                    taskNames[taskNumber] = task.taskName;
-                    areTasksFun[taskNumber] = task.fun;
-                    task.used = true;
+                    int funTaskID = ts.getFunTaskID(tasks);
+                    if (funTaskID != -1) {
+                        task task = tasks[funTaskID];
+                        taskNames[taskNumber] = task.taskName;
+                        areTasksFun[taskNumber] = task.fun;
+                        task.used = true;
+                    } else {
+                        taskNames[taskNumber] = "FREEDOM";
+                        areTasksFun[taskNumber] = true;
+                    }
+
                 } else {
                     // task is boring
-                    task task = tasks[ts.getNotFunTaskID(tasks)];
-                    taskNames[taskNumber] = task.taskName;
-                    areTasksFun[taskNumber] = task.fun;
-                    task.used = true;
+                    int notFunTaskID = ts.getNotFunTaskID(tasks);
+                    if(notFunTaskID != -1) {
+                        task task = tasks[notFunTaskID];
+                        taskNames[taskNumber] = task.taskName;
+                        areTasksFun[taskNumber] = task.fun;
+                        task.used = true;
+                    } else {
+                        taskNames[taskNumber] = "FREEDOM";
+                        areTasksFun[taskNumber] = true;
+                    }
                 }
             }
 

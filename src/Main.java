@@ -1,31 +1,45 @@
-import java.sql.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 public class Main {
+    private static void output(timetableForADay[] timetable){
+        int numberOfDays = timetable.length;
+        String[][] output = new String[numberOfDays][timetable[0].tasks.tasks.length + 1];
+
+        int i = 0;
+        for (timetableForADay day : timetable) {
+            output[i][0] = day.dayStartsAt.toString();
+            int ii = 1;
+            for (String taskName : day.tasks.tasks) {
+                output[i][ii] = taskName;
+                ii++;
+            }
+            i++;
+        }
+
+        for (int t = 0; t < output[1].length; t++){
+            for (int d = 0; d < output.length; d++){
+                System.out.print(output[d][t] + " ");
+            }
+            System.out.println();
+        }
+    }
 
     public static void main(String[] args) throws ParseException {
         task[] tasks = new task[3];
         tasks[0] = new task("WQ12", false, 1);
         tasks[1] = new task("PRJ2", false, 1);
-        tasks[2] = new task("fun", true, 1);
+        tasks[2] = new task("fun", true, 2);
 
-        setTimes st = new setTimes("7/4/2016", "8/4/2016", "30");
-        [] startTimes = {(Date) df.parse("07/04/2016 09:00"), (Date) df.parse("07/04/2016 09:00")};
-        Date[] endTimes = {(Date) df.parse("07/04/2016 18:00"), (Date) df.parse("07/04/2016 18:00")};
-        workingDay[] days = st.generateDays(startTimes, endTimes);
+        setTimes st = new setTimes("7/4/2016", "08/4/2016", "30");
+        workingDay[] days = st.inputDayTimes(new String[]{"09:00", "09:00"}, new String[]{"17:00", "17:00"});
 
-        lenghtOfTasks lt = new lenghtOfTasks("30");
+        lengthOfTasks lt = new lengthOfTasks("30");
 
         int[] noOfTasksInEachDay = lt.getNumberOfTasksInEachDay(days);
         int lengthOfTasks = lt.getLengthOfOneEstimationPointInMinutes();
 
-        timetableForADay timetable[];
+        timetableForADay[] timetable = st.assignTasksToDays(tasks,noOfTasksInEachDay,lengthOfTasks,days);
 
-        timetable = st.assignTasksToDays(tasks,noOfTasksInEachDay,lengthOfTasks,days);
-
-        System.out.println(Arrays.toString(timetable));
+        output(timetable);
     }
 }

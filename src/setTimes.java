@@ -4,8 +4,6 @@ import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.util.stream.IntStream;
-
 /**
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
@@ -13,49 +11,20 @@ import java.util.stream.IntStream;
 class setTimes {
     private long totalNumberOfDays;
 
-    setTimes(String startDate, String endDate, String lengthOfOneEstimationPointAsString) {
-        DateTimeFormatter df = DateTimeFormat.forPattern("dd/MM/yyyy");
-
-        LocalDate startDate1 = df.parseLocalDate(startDate);
-        LocalDate endDate1 = df.parseLocalDate(endDate);
-
-        this.totalNumberOfDays = Days.daysBetween(startDate1, endDate1).getDays();
+    setTimes(LocalDate startDate, LocalDate endDate) {
+        this.totalNumberOfDays = Days.daysBetween(startDate, endDate).getDays();
     }
 
-    workingDay[] generateDays(LocalTime dayStartsAt[], LocalTime dayEndsAt[]){
-        workingDay[] days = new workingDay[dayStartsAt.length];
+    workingDayTimes[] generateDays(LocalTime dayStartsAt[], LocalTime dayEndsAt[]){
+        workingDayTimes[] days = new workingDayTimes[dayStartsAt.length];
 
         for(int i = 0; i < dayStartsAt.length; i++)
-            days[i] = new workingDay(dayStartsAt[i], dayEndsAt[i]);
+            days[i] = new workingDayTimes(dayStartsAt[i], dayEndsAt[i]);
 
         return days;
     }
 
-    LocalTime[] dateStringsToDateTimes(String[] dateStringArray) {
-        LocalTime[] dateTimes =  new LocalTime[dateStringArray.length];
-        for (int i = 0; i < dateStringArray.length; i++) {
-            DateTimeFormatter df = DateTimeFormat.forPattern("HH:mm");
-            try {
-                dateTimes[i] = df.parseLocalTime(dateStringArray[i]);
-            } catch (Exception e) {
-                // incorrect format
-                // EXIT CODE 3
-                System.exit(3);
-            }
-        }
-        return dateTimes;
-    }
-
-    workingDay[] inputDayTimes(String[] dayStartsAtStrings, String[] dayEndsAtStrings){
-        // EXIT CODE 2
-        if (dayStartsAtStrings.length - dayEndsAtStrings.length != 0) System.exit(2);
-        LocalTime[] dayStartsAtDateTimes = dateStringsToDateTimes(dayStartsAtStrings),
-                dayEndsAtDateTimes = dateStringsToDateTimes(dayEndsAtStrings);
-
-        return generateDays(dayStartsAtDateTimes, dayEndsAtDateTimes);
-    }
-
-    timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lenghtOfTasksInMins, workingDay[] startAndEndTimes){
+    timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lenghtOfTasksInMins, workingDayTimes[] startAndEndTimes){
         int numberOfDays = numberOfTasksForEachDay.length;
               //  totalNumberOfTasks = IntStream.of(numberOfDays).sum();
         timetableForADay[] timetable = new timetableForADay[numberOfDays];
@@ -67,7 +36,7 @@ class setTimes {
             String[] taskNames = new String[numberOfTasksForEachDay[dayNumber]];
             boolean[] areTasksFun = new boolean[numberOfTasksForEachDay[dayNumber]];
 
-            // count through number of tasks for that day
+            // count through number of taskNames for that day
             for (int taskNumber = 0; taskNumber < numberOfTasksForEachDay[dayNumber]; taskNumber++){
                 // odd is fun even is not
                 if (taskNumber % 2 == 1){

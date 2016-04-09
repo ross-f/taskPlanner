@@ -1,6 +1,3 @@
-import org.joda.time.Minutes;
-import org.joda.time.ReadableInstant;
-
 import static java.lang.Integer.parseInt;
 import static org.joda.time.Minutes.minutesBetween;
 
@@ -11,27 +8,11 @@ import static org.joda.time.Minutes.minutesBetween;
 public class lengthOfTasks {
     int lengthOfOneEstimationPointInMinutes;
 
-    public lengthOfTasks(String lengthOfOneEstimationPointAsString){
-        String[] times = lengthOfOneEstimationPointAsString.split(":");
-        int hours = 0;
-        int minutes = 0;
-
-        switch (times.length) {
-            case 1:
-                minutes = parseInt(times[0]);
-                break;
-            case 2:
-                hours = parseInt(times[0]);
-                break;
-            default:
-                //EXIT CODE 4
-                System.exit(4);
-        }
-
-        this.lengthOfOneEstimationPointInMinutes = (hours * 60) + minutes;
+    public lengthOfTasks(int lengthOfOneEstimationPointAsString){
+        this.lengthOfOneEstimationPointInMinutes = lengthOfOneEstimationPointAsString;
     }
 
-    public int[] getNumberOfTasksInEachDay(workingDay days[]){
+    public int[] getNumberOfTasksInEachDay(workingDayTimes days[]){
         int numberOfDays = days.length;
         int[] numberOfTasksInEachDay = new int[numberOfDays];
         for (int i = 0; i < numberOfDays; i++) {

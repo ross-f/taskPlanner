@@ -1,5 +1,6 @@
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 /**
  * Created by ross on 4/3/16.
@@ -16,4 +17,16 @@ public class task {
         this.fun = fun;
         this.estimationPoints = estimationPoints;
     }
+
+    /*
+    public task[] splitTasks(List<task> taskNames, int lengthOfTasks, int lengthOfEstimationPoint){
+        for (task task : taskNames) {
+            int taskLength = task.estimationPoints * lengthOfEstimationPoint;
+            int numberToSplitTo = taskLength / lengthOfTasks;
+
+            taskNames;
+
+        }
+    }
+    */
 }

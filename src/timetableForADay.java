@@ -18,8 +18,4 @@ public class timetableForADay {
         this.dayStartsAt = dayStartsAt;
         this.tasks = tasks;
     }
-
-    public void output(timetableForADay[] timetable){
-
-    }
 }

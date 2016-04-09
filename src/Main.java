@@ -1,39 +1,34 @@
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
+
 import java.text.ParseException;
 
 public class Main {
-    private static void output(timetableForADay[] timetable){
-        int numberOfDays = timetable.length;
-        String[][] output = new String[numberOfDays][timetable[0].tasks.tasks.length + 1];
-
-        int i = 0;
-        for (timetableForADay day : timetable) {
-            output[i][0] = day.dayStartsAt.toString();
-            int ii = 1;
-            for (String taskName : day.tasks.tasks) {
-                output[i][ii] = taskName;
-                ii++;
-            }
-            i++;
-        }
-
-        for (int t = 0; t < output[1].length; t++){
-            for (int d = 0; d < output.length; d++){
-                System.out.print(output[d][t] + " ");
-            }
-            System.out.println();
-        }
-    }
-
     public static void main(String[] args) throws ParseException {
-        task[] tasks = new task[3];
+        usability u = new usability("dd/MM/yyyy","HH:mm");
+        task[] tasks = new task[7];
+        // TODO - getTasksFromFile()
         tasks[0] = new task("WQ12", false, 1);
         tasks[1] = new task("PRJ2", false, 1);
         tasks[2] = new task("fun", true, 2);
+        tasks[3] = new task("task", true, 2);
+        tasks[4] = new task("fkavlvbal", false, 2);
+        tasks[5] = new task("fkavlvbavl", false, 2);
+        tasks[6] = new task("fkavlvbval", false, 2);
 
-        setTimes st = new setTimes("7/4/2016", "08/4/2016", "30");
-        workingDay[] days = st.inputDayTimes(new String[]{"09:00", "09:00"}, new String[]{"17:00", "17:00"});
+        LocalDate startDate = u.parseDate("07/4/2016");
+        LocalDate endDate = u.parseDate("08/4/2016");
+        setTimes st = new setTimes(startDate,endDate);
+        LocalTime[] startTimes = new LocalTime[2];
+        startTimes[0] = u.parseTime("09:00");
+        startTimes[1] = u.parseTime("09:00");
+        LocalTime[] endTimes = new LocalTime[2];
+        endTimes[0] = u.parseTime("17:00");
+        endTimes[1] = u.parseTime("17:00");
 
-        lengthOfTasks lt = new lengthOfTasks("30");
+        workingDayTimes[] days = st.generateDays(startTimes,endTimes);
+
+        lengthOfTasks lt = new lengthOfTasks(30);
 
         int[] noOfTasksInEachDay = lt.getNumberOfTasksInEachDay(days);
         int lengthOfTasks = lt.getLengthOfOneEstimationPointInMinutes();

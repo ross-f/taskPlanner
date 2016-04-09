@@ -3,13 +3,13 @@
  * Should be used as part of taskPlanner
  */
 public class tasksInADay {
-    String[] tasks;
+    String[] taskNames;
     boolean[] fun;
     int lengthOfTasks;
 
-    public tasksInADay(int lengthOfTasks, String[] tasks, boolean[] fun) {
+    public tasksInADay(int lengthOfTasks, String[] taskNames, boolean[] fun) {
         this.lengthOfTasks = lengthOfTasks;
-        this.tasks = tasks;
+        this.taskNames = taskNames;
         this.fun = fun;
     }
 }

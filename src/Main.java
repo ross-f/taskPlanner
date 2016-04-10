@@ -8,8 +8,8 @@ public class Main {
         usability u = new usability("dd/MM/yyyy","HH:mm");
         task[] tasks = new task[7];
         // TODO - getTasksFromFile()
-        tasks[0] = new task("WQ12", false, 1);
-        tasks[1] = new task("PRJ2", false, 1);
+        tasks[0] = new task("go outside", true, 1);
+        tasks[1] = new task("tidy room", false, 1);
         tasks[2] = new task("fun", true, 2);
         tasks[3] = new task("task", true, 2);
         tasks[4] = new task("fkavlvbal", false, 2);
@@ -23,8 +23,8 @@ public class Main {
         startTimes[0] = u.parseTime("09:00");
         startTimes[1] = u.parseTime("09:00");
         LocalTime[] endTimes = new LocalTime[2];
-        endTimes[0] = u.parseTime("17:00");
-        endTimes[1] = u.parseTime("17:00");
+        endTimes[0] = u.parseTime("12:00");
+        endTimes[1] = u.parseTime("12:00");
 
         workingDayTimes[] days = st.generateDays(startTimes,endTimes);
 
@@ -35,6 +35,6 @@ public class Main {
 
         timetableForADay[] timetable = st.assignTasksToDays(tasks,noOfTasksInEachDay,lengthOfTasks,days);
 
-        output(timetable);
+        u.output(timetable);
     }
 }

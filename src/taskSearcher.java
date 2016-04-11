@@ -11,8 +11,8 @@
  * loop though fun objects until used is false
  */
 
-public class taskSearcher {
-    public int getFunTaskID(task[] tasks){
+class taskSearcher {
+    int getFunTaskID(task[] tasks){
         for (int i = 0; i < tasks.length; i++) {
             if (tasks[i].fun && !tasks[i].used){
                 return i;
@@ -21,7 +21,7 @@ public class taskSearcher {
         return -1;
     }
 
-    public int getNotFunTaskID(task[] tasks){
+    int getNotFunTaskID(task[] tasks){
         for (int i = 0; i < tasks.length; i++) {
             if (!tasks[i].fun && !tasks[i].used){
                 return i;

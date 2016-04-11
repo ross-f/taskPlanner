@@ -1,18 +1,16 @@
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 /**
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
  */
 class setTimes {
-    private long totalNumberOfDays;
+    long totalNumberOfDays;
 
     setTimes(LocalDate startDate, LocalDate endDate) {
-        this.totalNumberOfDays = Days.daysBetween(startDate, endDate).getDays();
+        totalNumberOfDays = Days.daysBetween(startDate, endDate).getDays();
     }
 
     workingDayTimes[] generateDays(LocalTime dayStartsAt[], LocalTime dayEndsAt[]){
@@ -24,7 +22,7 @@ class setTimes {
         return days;
     }
 
-    timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lenghtOfTasksInMins, workingDayTimes[] startAndEndTimes){
+    timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lengthOfTasksInMinutes, workingDayTimes[] startAndEndTimes){
         int numberOfDays = numberOfTasksForEachDay.length;
               //  totalNumberOfTasks = IntStream.of(numberOfDays).sum();
         timetableForADay[] timetable = new timetableForADay[numberOfDays];
@@ -67,7 +65,7 @@ class setTimes {
                 }
             }
 
-            tasksForToday = new tasksInADay(lenghtOfTasksInMins, taskNames, areTasksFun);
+            tasksForToday = new tasksInADay(lengthOfTasksInMinutes, taskNames, areTasksFun);
             timetable[dayNumber] = new timetableForADay(dayStartsAt, tasksForToday);
         }
 

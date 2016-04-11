@@ -1,18 +1,17 @@
-import static java.lang.Integer.parseInt;
 import static org.joda.time.Minutes.minutesBetween;
 
 /**
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
  */
-public class lengthOfTasks {
-    int lengthOfOneEstimationPointInMinutes;
+class lengthOfTasks {
+    private int lengthOfOneEstimationPointInMinutes;
 
-    public lengthOfTasks(int lengthOfOneEstimationPointAsString){
+    lengthOfTasks(int lengthOfOneEstimationPointAsString){
         this.lengthOfOneEstimationPointInMinutes = lengthOfOneEstimationPointAsString;
     }
 
-    public int[] getNumberOfTasksInEachDay(workingDayTimes days[]){
+    int[] getNumberOfTasksInEachDay(workingDayTimes days[]){
         int numberOfDays = days.length;
         int[] numberOfTasksInEachDay = new int[numberOfDays];
         for (int i = 0; i < numberOfDays; i++) {
@@ -23,7 +22,7 @@ public class lengthOfTasks {
         return numberOfTasksInEachDay;
     }
 
-    public int getLengthOfOneEstimationPointInMinutes() {
+    int getLengthOfOneEstimationPointInMinutes() {
         return lengthOfOneEstimationPointInMinutes;
     }
 }

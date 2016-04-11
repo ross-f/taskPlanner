@@ -3,18 +3,14 @@ import org.joda.time.LocalTime;
 
 import java.text.ParseException;
 
-public class Main {
+class Main {
     public static void main(String[] args) throws ParseException {
+        int lengthOfOneEstimationPoint = 30;
+
         usability u = new usability("dd/MM/yyyy","HH:mm");
-        task[] tasks = new task[7];
+
         // TODO - getTasksFromFile()
-        tasks[0] = new task("go outside", true, 1);
-        tasks[1] = new task("tidy room", false, 1);
-        tasks[2] = new task("fun", true, 2);
-        tasks[3] = new task("task", true, 2);
-        tasks[4] = new task("fkavlvbal", false, 2);
-        tasks[5] = new task("fkavlvbavl", false, 2);
-        tasks[6] = new task("fkavlvbval", false, 2);
+        task[] tasks = u.getTasksFromFile("tasks.csv");
 
         LocalDate startDate = u.parseDate("07/4/2016");
         LocalDate endDate = u.parseDate("08/4/2016");
@@ -28,7 +24,7 @@ public class Main {
 
         workingDayTimes[] days = st.generateDays(startTimes,endTimes);
 
-        lengthOfTasks lt = new lengthOfTasks(30);
+        lengthOfTasks lt = new lengthOfTasks(lengthOfOneEstimationPoint);
 
         int[] noOfTasksInEachDay = lt.getNumberOfTasksInEachDay(days);
         int lengthOfTasks = lt.getLengthOfOneEstimationPointInMinutes();

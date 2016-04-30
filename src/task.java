@@ -1,3 +1,5 @@
+import org.joda.time.LocalDateTime;
+
 import java.util.List;
 
 /**
@@ -26,5 +28,44 @@ class task {
         }
         task[] tasks = new task[1];
         return tasks;
+    }
+}
+
+class generatedTask {
+    private String taskName;
+    private boolean fun;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
+
+    public String getTaskName() {
+        return taskName;
+    }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public boolean isFun() {
+        return fun;
+    }
+
+    public void setFun(boolean fun) {
+        this.fun = fun;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 }

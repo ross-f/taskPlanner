@@ -26,7 +26,7 @@ class setTimes {
         int numberOfDays = numberOfTasksForEachDay.length;
               //  totalNumberOfTasks = IntStream.of(numberOfDays).sum();
         timetableForADay[] timetable = new timetableForADay[numberOfDays];
-        taskSearcher ts = new taskSearcher();
+        taskManager ts = new taskManager();
         //count through each day
         for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++ ) {
             LocalTime dayStartsAt = startAndEndTimes[dayNumber].dayStartsAt;

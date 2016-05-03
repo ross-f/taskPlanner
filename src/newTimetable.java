@@ -4,33 +4,33 @@ import javax.swing.table.DefaultTableModel;
  * Created by ross on 4/11/16.
  * Should be used as part of taskPlanner
  */
-class simpleTable extends DefaultTableModel {
-    private String[] colNames;
-    private Object[][] tableData;
+class timetable extends DefaultTableModel {
+    private String[] dayNames;
+    private Object[][] timetableData;
 
-    public simpleTable(String[] colNames, Object[][] tableData) {
-        this.colNames = colNames;
-        this.tableData = tableData;
+    timetable(String[] dayNames, Object[][] timetableData) {
+        this.dayNames = dayNames;
+        this.timetableData = timetableData;
     }
 
     @Override
     public int getRowCount() {
-        return tableData.length;
+        return timetableData.length;
     }
 
     @Override
     public int getColumnCount() {
-        return colNames.length;
+        return dayNames.length;
     }
 
     @Override
     public String getColumnName(int i) {
-        return colNames[i];
+        return dayNames[i];
     }
 
     @Override
     public Object getValueAt(int row, int col) {
-        return tableData[row][col];
+        return timetableData[row][col];
     }
 
     @Override
@@ -45,7 +45,9 @@ class simpleTable extends DefaultTableModel {
 
     @Override
     public void setValueAt(Object o, int row, int col) {
-        tableData[row][col] = o;
-        fireTableCellUpdated(row,col);
+        timetableData[row][col] = o;
+        fireTableCellUpdated(row, col);
     }
+
+    public int getDayCount() { return getRowCount(); }
 }

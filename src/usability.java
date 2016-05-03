@@ -3,9 +3,6 @@ import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.io.*;
-import java.util.Scanner;
-
 /**
  * Created by ross on 4/9/16.
  * Should be used as part of taskPlanner
@@ -58,75 +55,6 @@ class usability {
         return dateTimes;
     }
 
-    task[] getTasksFromFile(String filename) {
-        /**
-         * This method will read the tasks from the csv file
-         * - it is independent and and be moved from the usability class
-         * File template is as follows
-         * - line one is headings and must be in the file
-         * -- however they can be any order
-         */
-        String firstLine = "Task name,Fun,Estimation points";
-        /**
-         * An example task,Yes,1
-         * Another example task,false,3
-         * A fun task,1,1
-         * A not fun very long task,0,100
-         */
-
-        File file = new File(filename);
-        Scanner s = null;
-        LineNumberReader lnr = null;
-        try {
-            // open file
-            s = new Scanner(file);
-            lnr = new LineNumberReader(new FileReader(file));
-        } catch (FileNotFoundException e) {
-            System.out.println("Invalid file name");
-            System.exit(1);
-        }
-        // get number of lines in file
-        try {
-            //noinspection ResultOfMethodCallIgnored
-            lnr.skip(Long.MAX_VALUE);
-        } catch (IOException e) {
-            System.out.println("¯\\_('_')_/¯");
-        }
-        int numberOfLines = lnr.getLineNumber();
-
-        // make number of tasks based on file lines minus 1 for heading
-        task[] tasks = new task[numberOfLines - 1];
-
-        // validate first line
-        String actualFirstLine = s.nextLine();
-        if (!actualFirstLine.equals(firstLine)) {
-            System.out.println("File does not match template, first line must be:\n" + firstLine +"\nFound:\n" + actualFirstLine);
-            System.exit(1);
-        }
-        int taskNumber = 0; //Arrays start at 0 duh
-
-        // put tasks into array
-        while (s.hasNextLine()) {
-            String[] line = new String[3];
-            try {
-                line = s.nextLine().split(",");
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Too many columns on line " + taskNumber);
-                System.exit(1);
-            }
-
-            // TODO - MAKE COLUMNS SWITCHABLE
-            tasks[taskNumber] = new task(line[0],Boolean.getBoolean(line[1]),Integer.parseInt(line[2]));
-
-            taskNumber++;
-        }
-
-        // double check for lost tasks
-        if (taskNumber != numberOfLines - 1) System.out.println("Some tasks were lost");
-
-        return tasks;
-    }
-
     void output(timetableForADay[] timetable){
         // Put timetable into 2d array
         int numberOfDays = timetable.length;
@@ -144,9 +72,10 @@ class usability {
         }
 
         // reverse output so it does by time not by day
+        // TODO - MAKE OUTPUT FORMATTED TABLE
         for (int t = 0; t < output[1].length; t++){
             for (String[] anOutput : output) {
-                System.out.print("| " + anOutput[t] + " ");
+                System.out.printf("%s\t%s\t", "| ", anOutput[t]);
             }
             System.out.print("|\n");
         }

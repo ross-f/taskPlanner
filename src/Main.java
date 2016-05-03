@@ -6,11 +6,11 @@ import java.text.ParseException;
 class Main {
     public static void main(String[] args) throws ParseException {
         int lengthOfOneEstimationPoint = 30;
+        taskManager tm = new taskManager();
 
         usability u = new usability("dd/MM/yyyy","HH:mm");
 
-        // TODO - getTasksFromFile()
-        task[] tasks = u.getTasksFromFile("tasks.csv");
+        task[] tasks = tm.getTasksFromFile("tasks.csv");
 
         LocalDate startDate = u.parseDate("07/4/2016");
         LocalDate endDate = u.parseDate("08/4/2016");

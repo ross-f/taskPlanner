@@ -72,9 +72,10 @@ class usability {
         }
 
         // reverse output so it does by time not by day
+        // TODO - MAKE OUTPUT FORMATTED TABLE
         for (int t = 0; t < output[1].length; t++){
             for (String[] anOutput : output) {
-                System.out.print("| " + anOutput[t] + " ");
+                System.out.printf("%s\t%s\t", "| ", anOutput[t]);
             }
             System.out.print("|\n");
         }

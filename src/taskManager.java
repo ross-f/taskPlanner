@@ -35,7 +35,7 @@ class taskManager {
     }
 
     task[] getTasksFromFile(String filename) {
-        /**
+        /*
          * This method will read the tasks from the csv file
          * - it is independent and and be moved from the usability class
          * File template is as follows
@@ -43,7 +43,7 @@ class taskManager {
          * -- however they can be any order
          */
         String firstLine = "Task name,Fun,Estimation points";
-        /**
+        /*
          * An example task,Yes,1
          * Another example task,false,3
          * A fun task,1,1
@@ -59,18 +59,20 @@ class taskManager {
             s = new Scanner(file);
             lnr = new LineNumberReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            System.err.println("Invalid file name");
+            System.err.println("Invalid file name / not found");
             System.exit(1);
         }
 
         // get number of lines in file
-
+        // TODO - manage extra end line at end of csv
         try {
             //noinspection ResultOfMethodCallIgnored
             lnr.skip(Long.MAX_VALUE);
         } catch (IOException e) {
-            System.out.println("¯\\_('_')_/¯");
+            System.out.println("Can't skip lines");
+            System.exit(1);
         }
+
         int numberOfLines = lnr.getLineNumber();
 
 
@@ -102,7 +104,7 @@ class taskManager {
                 System.exit(1);
             }
 
-            // TODO - MAKE COLUMNS SWITCHABLE
+            // TODO - MAKE COLUMNS SWITCHABLE BASED OFF NAMES
             tasks[taskNumber] = new task(line[0],Boolean.getBoolean(line[1]),Integer.parseInt(line[2]));
 
             taskNumber++;

@@ -9,7 +9,6 @@ class Main {
 
         usability u = new usability("dd/MM/yyyy","HH:mm");
 
-        // TODO - getTasksFromFile()
         task[] tasks = u.getTasksFromFile("tasks.csv");
 
         LocalDate startDate = u.parseDate("07/4/2016");

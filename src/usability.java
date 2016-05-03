@@ -82,7 +82,7 @@ class usability {
             s = new Scanner(file);
             lnr = new LineNumberReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            System.out.println("Invalid file name");
+            System.err.println("Invalid file name");
             System.exit(1);
         }
         // get number of lines in file
@@ -95,12 +95,19 @@ class usability {
         int numberOfLines = lnr.getLineNumber();
 
         // make number of tasks based on file lines minus 1 for heading
-        task[] tasks = new task[numberOfLines - 1];
+        // catch negative array will mean file is empty
+        task[] tasks = {};
+        try {
+            tasks = new task[numberOfLines - 1];
+        } catch (NegativeArraySizeException e) {
+            System.err.println("FILE IS EMPTY");
+            System.exit(1);
+        }
 
         // validate first line
         String actualFirstLine = s.nextLine();
         if (!actualFirstLine.equals(firstLine)) {
-            System.out.println("File does not match template, first line must be:\n" + firstLine +"\nFound:\n" + actualFirstLine);
+            System.err.println("File does not match template, first line must be:\n" + firstLine +"\nFound:\n" + actualFirstLine);
             System.exit(1);
         }
         int taskNumber = 0; //Arrays start at 0 duh
@@ -111,7 +118,7 @@ class usability {
             try {
                 line = s.nextLine().split(",");
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Too many columns on line " + taskNumber);
+                System.err.println("Too many columns on line " + taskNumber);
                 System.exit(1);
             }
 

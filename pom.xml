@@ -26,15 +26,21 @@
             <artifactId>j-text-utils</artifactId>
             <version>0.3.3</version>
             <groupId>org.tigris.jsapar</groupId>
-          </dependency>
+        </dependency>
         <dependency>
-            <artifactId>jsapar</artifactId>
-            <version>1.6.2</version>
-        </dependancy>
-        <dependancy>
             <groupId>dnl.utils</groupId>
             <artifactId>j-text-utils</artifactId>
             <version>0.3.3</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.3</version>
         </dependency>
     </dependencies>
     <repositories>

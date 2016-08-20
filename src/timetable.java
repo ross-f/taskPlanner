@@ -49,5 +49,5 @@ class timetable extends DefaultTableModel {
         fireTableCellUpdated(row, col);
     }
 
-    public int getDayCount() { return getRowCount(); }
+    public int getDayCount() { return getColumnCount(); }
 }

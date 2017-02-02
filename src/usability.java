@@ -6,8 +6,11 @@ import org.joda.time.format.DateTimeFormatter;
 /**
  * Created by ross on 4/9/16.
  * Should be used as part of taskPlanner
+ *
+ * This allows easier cli access to core components of the project
  */
 class usability {
+    // Date time formatter to all
     private DateTimeFormatter dateFMT;
     private DateTimeFormatter timeFMT;
 

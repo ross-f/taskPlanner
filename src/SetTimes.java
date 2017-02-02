@@ -24,10 +24,10 @@ class SetTimes {
 
     timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lengthOfTasksInMinutes, workingDayTimes[] startAndEndTimes){
         int numberOfDays = numberOfTasksForEachDay.length;
-              //  totalNumberOfTasks = IntStream.of(numberOfDays).sum();
+        //  totalNumberOfTasks = IntStream.of(numberOfDays).sum();
         timetableForADay[] timetable = new timetableForADay[numberOfDays];
         taskManager ts = new taskManager();
-        //count through each day
+        // count through each day
         for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++ ) {
             LocalTime dayStartsAt = startAndEndTimes[dayNumber].dayStartsAt;
             tasksInADay tasksForToday;

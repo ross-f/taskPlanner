@@ -10,7 +10,7 @@ class Main {
 
         usability u = new usability("dd/MM/yyyy","HH:mm");
 
-        task[] tasks = tm.getTasksFromFile("tasks.csv");
+        task[] tasks = tm.getTasksFromFile("/Users/rfletcher/projects/taskPlanner/tasks.csv");
 
         LocalDate startDate = u.parseDate("07/4/2016");
         LocalDate endDate = u.parseDate("08/4/2016");

@@ -59,7 +59,7 @@ class taskManager {
             s = new Scanner(file);
             lnr = new LineNumberReader(new FileReader(file));
         } catch (FileNotFoundException e) {
-            System.err.println("Invalid file name / not found");
+            System.err.println("FILE NOT FOUND: " + filename);
             System.exit(1);
         }
 

@@ -2,3 +2,10 @@ Task name,Fun,Estimation points
 example,0,1
 another example,0,2
 a fun example that takes a while,1,1000
+Task 1,false,1
+Task 2,True,1
+example,0,1
+another example,0,2
+a fun example that takes a while,1,1000
+Task 1,false,1
+Task 2,True,1

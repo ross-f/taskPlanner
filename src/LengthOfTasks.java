@@ -4,10 +4,10 @@ import static org.joda.time.Minutes.minutesBetween;
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
  */
-class lengthOfTasks {
+class LengthOfTasks {
     private int lengthOfOneEstimationPointInMinutes;
 
-    lengthOfTasks(int lengthOfOneEstimationPointAsString){
+    LengthOfTasks(int lengthOfOneEstimationPointAsString){
         this.lengthOfOneEstimationPointInMinutes = lengthOfOneEstimationPointAsString;
     }
 

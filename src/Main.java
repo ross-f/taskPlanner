@@ -14,7 +14,7 @@ class Main {
 
         LocalDate startDate = u.parseDate("07/4/2016");
         LocalDate endDate = u.parseDate("08/4/2016");
-        setTimes st = new setTimes(startDate,endDate);
+        SetTimes st = new SetTimes(startDate,endDate);
         LocalTime[] startTimes = new LocalTime[2];
         startTimes[0] = u.parseTime("09:00");
         startTimes[1] = u.parseTime("09:00");
@@ -24,7 +24,7 @@ class Main {
 
         workingDayTimes[] days = st.generateDays(startTimes,endTimes);
 
-        lengthOfTasks lt = new lengthOfTasks(lengthOfOneEstimationPoint);
+        LengthOfTasks lt = new LengthOfTasks(lengthOfOneEstimationPoint);
 
         int[] noOfTasksInEachDay = lt.getNumberOfTasksInEachDay(days);
         int lengthOfTasks = lt.getLengthOfOneEstimationPointInMinutes();

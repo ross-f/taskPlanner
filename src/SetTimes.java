@@ -6,10 +6,10 @@ import org.joda.time.LocalTime;
  * Created by ross on 4/3/16.
  * Should be used as part of taskPlanner
  */
-class setTimes {
+class SetTimes {
     long totalNumberOfDays;
 
-    setTimes(LocalDate startDate, LocalDate endDate) {
+    SetTimes(LocalDate startDate, LocalDate endDate) {
         totalNumberOfDays = Days.daysBetween(startDate, endDate).getDays();
     }
 

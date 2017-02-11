@@ -5,12 +5,23 @@ import java.text.ParseException;
 
 class Main {
     public static void main(String[] args) throws ParseException {
-        int lengthOfOneEstimationPoint = 30;
-        taskManager tm = new taskManager();
+        // arg[0] = time file, arg[1] = Task file
+        if (args.length < 2) {
+            System.out.println("not enough args");
+            for (String arg : args) System.out.print(arg + " ");
+        }
 
+        // write class to rip times
+
+        int LENGTH_OF_ONE_ESTIMATION_POINT = 30;
+        String timeFileName = args[0];
+        String taskFileName = args[1];
+        FileManager tm = new FileManager();
+
+        // usibility for date parseing so shouldnt need it with args
         usability u = new usability("dd/MM/yyyy","HH:mm");
 
-        task[] tasks = tm.getTasksFromFile("/Users/rfletcher/projects/taskPlanner/tasks.csv");
+        Task[] tasks = tm.getTasksFromFile(taskFileName);
 
         LocalDate startDate = u.parseDate("07/4/2016");
         LocalDate endDate = u.parseDate("08/4/2016");
@@ -24,7 +35,7 @@ class Main {
 
         workingDayTimes[] days = st.generateDays(startTimes,endTimes);
 
-        LengthOfTasks lt = new LengthOfTasks(lengthOfOneEstimationPoint);
+        LengthOfTasks lt = new LengthOfTasks(LENGTH_OF_ONE_ESTIMATION_POINT);
 
         int[] noOfTasksInEachDay = lt.getNumberOfTasksInEachDay(days);
         int lengthOfTasks = lt.getLengthOfOneEstimationPointInMinutes();

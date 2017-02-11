@@ -22,11 +22,11 @@ class SetTimes {
         return days;
     }
 
-    timetableForADay[] assignTasksToDays(task[] tasks, int[] numberOfTasksForEachDay, int lengthOfTasksInMinutes, workingDayTimes[] startAndEndTimes){
+    timetableForADay[] assignTasksToDays(Task[] tasks, int[] numberOfTasksForEachDay, int lengthOfTasksInMinutes, workingDayTimes[] startAndEndTimes){
         int numberOfDays = numberOfTasksForEachDay.length;
         //  totalNumberOfTasks = IntStream.of(numberOfDays).sum();
         timetableForADay[] timetable = new timetableForADay[numberOfDays];
-        taskManager ts = new taskManager();
+        FileManager ts = new FileManager();
         // count through each day
         for (int dayNumber = 0; dayNumber < numberOfDays; dayNumber++ ) {
             LocalTime dayStartsAt = startAndEndTimes[dayNumber].dayStartsAt;
@@ -38,10 +38,10 @@ class SetTimes {
             for (int taskNumber = 0; taskNumber < numberOfTasksForEachDay[dayNumber]; taskNumber++){
                 // odd is fun even is not
                 if (taskNumber % 2 == 1){
-                    // task is fun
+                    // Task is fun
                     int funTaskID = ts.getFunTaskID(tasks);
                     if (funTaskID != -1) {
-                        task task = tasks[funTaskID];
+                        Task task = tasks[funTaskID];
                         taskNames[taskNumber] = task.taskName;
                         areTasksFun[taskNumber] = task.fun;
                         task.used = true;
@@ -51,10 +51,10 @@ class SetTimes {
                     }
 
                 } else {
-                    // task is boring
+                    // Task is boring
                     int notFunTaskID = ts.getNotFunTaskID(tasks);
                     if(notFunTaskID != -1) {
-                        task task = tasks[notFunTaskID];
+                        Task task = tasks[notFunTaskID];
                         taskNames[taskNumber] = task.taskName;
                         areTasksFun[taskNumber] = task.fun;
                         task.used = true;

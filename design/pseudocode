@@ -1,9 +1,1 @@
-taskPlanner( prameters ) {
-  inserttaskfile(file)
-  Spilt tasks()
-  makeTimetalbe
-  display()
-}
-
-
-
+taskPlanner times.csv tasks.csv
